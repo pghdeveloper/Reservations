@@ -34,7 +34,7 @@ public class ReservationSystemRepository : IReservationSystemsRepository
     {
         using (var connection = _sqlConnectionFactory.CreateSqlConnection())
         {
-            const string sql = @"SELECT Top 1 * FROM Schedules WHERE ProviderId = @id AND Date(StartDateTime) = @date";
+            const string sql = @"SELECT * FROM Schedules WHERE ProviderId = @id AND Date(StartDateTime) = @date LIMIT 1";
             return await connection.QueryFirstOrDefaultAsync<Schedule>(sql, new { id, date });
         }
     }

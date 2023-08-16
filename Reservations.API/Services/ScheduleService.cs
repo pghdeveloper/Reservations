@@ -4,7 +4,7 @@ using Reservations.API.Repositories;
 
 namespace Reservations.API.Services;
 
-public class ScheduleService
+public class ScheduleService : IScheduleService
 {
     private readonly IReservationSystemsRepository _reservationSystemsRepository;
     
@@ -24,15 +24,16 @@ public class ScheduleService
         var schedule = new Schedule
         {
             ProviderId = provider.ProviderId,
-            StartDateTime = request.StartDateTime,
-            EndDateTime = request.EndDateTime
+            StartDateTime = request.StartDateTime.ToString("yyyy-MM-dd hh:mm:ss"),
+            EndDateTime = request.EndDateTime.ToString("yyyy-MM-dd hh:mm:ss"),
+            ScheduleExternalId = Guid.NewGuid().ToString()
         };
         
         DateTime.TryParse(schedule.StartDateTime, out var dateTime);
-        DateTime dateOnly = dateTime.Date;
+        var dateOnly = dateTime.Date;
 
         // If you want the date as a string, format it as needed
-        string dateString = dateOnly.ToString("yyyy-MM-dd");
+        var dateString = dateOnly.ToString("yyyy-MM-dd");
         
         var existingSchedule = await _reservationSystemsRepository.GetSchedule(schedule.ProviderId, dateString);
         

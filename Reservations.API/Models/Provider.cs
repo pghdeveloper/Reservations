@@ -4,7 +4,7 @@ using Dapper.Contrib.Extensions;
 namespace Reservations.API.Models;
 
 [Serializable]
-[Table("Schedules")]
+[Table("Providers")]
 public class Provider
 {
     [Key]

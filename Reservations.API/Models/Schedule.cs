@@ -13,4 +13,5 @@ public class Schedule
     public int ProviderId { get; set; }
     public string StartDateTime { get; set; }
     public string EndDateTime { get; set; }
+    public string ScheduleExternalId { get; set; }
 }
