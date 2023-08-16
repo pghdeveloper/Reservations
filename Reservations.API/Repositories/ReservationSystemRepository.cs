@@ -1,4 +1,5 @@
 using Dapper;
+using Dapper.Contrib.Extensions;
 using Reservations.API.Models;
 
 namespace Reservations.API.Repositories;
@@ -12,7 +13,7 @@ public class ReservationSystemRepository : IReservationSystemsRepository
         _sqlConnectionFactory = sqlConnectionFactory;
     }
     
-    public async Task<Provider> GetProviders(string externalId)
+    public async Task<Provider> GetProvider(string externalId)
     {
         using (var connection = _sqlConnectionFactory.CreateSqlConnection())
         {
@@ -20,12 +21,30 @@ public class ReservationSystemRepository : IReservationSystemsRepository
             return await connection.QueryFirstOrDefaultAsync<Provider>(sql, new { externalId });
         }
     }
+    
+    public async Task InsertSchedule(Schedule schedule)
+    {
+        using (var connection = _sqlConnectionFactory.CreateSqlConnection())
+        {
+            await connection.InsertAsync(schedule);
+        }
+    }
+
+    public async Task<Schedule> GetSchedule(int id, string date)
+    {
+        using (var connection = _sqlConnectionFactory.CreateSqlConnection())
+        {
+            const string sql = @"SELECT Top 1 * FROM Schedules WHERE ProviderId = @id AND Date(StartDateTime) = @date";
+            return await connection.QueryFirstOrDefaultAsync<Schedule>(sql, new { id, date });
+        }
+    }
 }
 
 public interface IReservationSystemsRepository
 {
-    Task<Provider> GetProviders(string externalId);
-    //Task InsertSchedule(Schedule schedule);
+    Task<Provider> GetProvider(string externalId);
+    Task InsertSchedule(Schedule schedule);
+    Task<Schedule> GetSchedule(int id, string date);
     //Task DeleteAsync(Guid externalId);
     //Task<IEnumerable<Assignments>> GetTasksByAssignee(string assignee);
     //Task UpdateAsync(Assignments assignment);
