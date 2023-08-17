@@ -1,2 +1,8 @@
-# Reservations
-Reservations API
+# Reservations App
+C# API that handles adding schedules for providers, clients reserving 15 minute slots from the providers schedule, and clients confirming those slots.  I added a Postman Collection for this and I used Sqlite within the application which already has data.  Due to time constraints, I did not have a chance to do any unit testing or handle further scenarios such as expired reservations after 30 minutes and 24 hour advance notice when making a reservation
+
+1.  With The 24 hour advance notice, when someone sends a request in, we may not necessarily know what time zone the client in if they send us a basic date time without UTC consideration.  One thing we could have done is take into account of the location of the provider, and assume that the client making the appointment is in the same time zone as the provider
+
+2.  With Expired reservations, my thought process was when the appointment was created, we serialize the appointment(probably only need the appointmentExternalId to serialzie) and send it to a message queue like Azure Service Bus or RabbitMq for example.  The message would be delayed to process for 30 minutes.  Once the 30 minute is up, a consumer picks up the message and deserializes it.  We then make a call to the database to see if the appointment ended up being confirmed.  If it did, then we do nothing.  Else we updated the record where we set Expired field to true.  The cons of this is that no matter we would have to make a DB call every time to see if the appointment was confirmed or not.  But this at least guarantees that we will always expire a reservation at the appropriate time.  I thought of running a job every 5 to 10 minutes that would check all appointments where confirmed is false and current date and time is greater than the expiration date for each record.  The problem with that is if you let's say an appointment was created at 11:26 and the job runs at 11:55.  The record will still have confirmed as 0, and the client has an extra 4 minutes to confirm which we don't want.
+
+Overall I enjoyed working on this assignment, and would love to hear some feedback on this.
