@@ -24,8 +24,8 @@ public class ScheduleService : IScheduleService
         var schedule = new Schedule
         {
             ProviderId = provider.ProviderId,
-            StartDateTime = request.StartDateTime.ToString("yyyy-MM-dd hh:mm:ss"),
-            EndDateTime = request.EndDateTime.ToString("yyyy-MM-dd hh:mm:ss"),
+            StartDateTime = request.StartDateTime.ToString("yyyy-MM-dd HH:mm:ss"),
+            EndDateTime = request.EndDateTime.ToString("yyyy-MM-dd HH:mm:ss"),
             ScheduleExternalId = Guid.NewGuid().ToString()
         };
         
