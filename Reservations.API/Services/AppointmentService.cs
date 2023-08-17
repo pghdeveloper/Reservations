@@ -66,9 +66,15 @@ public class AppointmentService : IAppointmentService
             AppointmentExternalId = appointment.AppointmentExternalId
         };
     }
+    
+    public async Task ConfirmAppointment(string appointmentExternalId)
+    {
+        await _reservationSystemsRepository.ConfirmAppointment(appointmentExternalId);
+    }
 }
 
 public interface IAppointmentService
 {
-    Task<AppointmentResponse> CreateAppointment(AppointmentRequest request);   
+    Task<AppointmentResponse> CreateAppointment(AppointmentRequest request);
+    Task ConfirmAppointment(string appointmentExternalId);
 }

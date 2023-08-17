@@ -73,6 +73,15 @@ public class ReservationSystemRepository : IReservationSystemsRepository
             return await connection.QueryFirstOrDefaultAsync<Appointment>(sql, new { scheduleId, appointmentDateTime });
         }
     }
+
+    public async Task ConfirmAppointment(string appointmentExternalId)
+    {
+        using (var connection = _sqlConnectionFactory.CreateSqlConnection())
+        {
+            const string sql = @"UPDATE Appointments SET Confirmed = 1 WHERE AppointmentExternalId = @appointmentExternalId";
+            await connection.ExecuteAsync(sql, new { appointmentExternalId });
+        }
+    }
 }
 
 public interface IReservationSystemsRepository
@@ -84,4 +93,5 @@ public interface IReservationSystemsRepository
     Task<Client> GetClient(string externalId);
     Task<Schedule> GetScheduleByExternalId(string externalId);
     Task<Appointment> GetAppointmentByScheduleIdAndAppointmentDateTime(int scheduleId, string appointmentDateTime);
+    Task ConfirmAppointment(string appointmentExternalId);
 }

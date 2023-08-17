@@ -18,6 +18,21 @@ public class AppointmentController : Controller
         _appointmentService = appointmentService;
     }
     
+    [HttpPost("{applicationExternalId}")]
+    public async Task<IActionResult> ConfirmAppointment(string applicationExternalId)
+    {
+        try
+        {
+            await _appointmentService.ConfirmAppointment(applicationExternalId);
+            return Ok("Appointment Confirmed");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+            return StatusCode(500, "Appointment not able to be confirmed");
+        }
+    }
+    
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] AppointmentRequest request)
     {
