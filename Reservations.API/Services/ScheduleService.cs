@@ -13,7 +13,7 @@ public class ScheduleService : IScheduleService
         _reservationSystemsRepository = reservationSystemsRepository;
     }
     
-    public async Task ProcessSchedule(ScheduleRequest request)
+    public async Task CreateSchedule(ScheduleRequest request)
     {
         var provider = await _reservationSystemsRepository.GetProvider(request.ProviderExternalId);
         if (provider == null)
@@ -48,5 +48,5 @@ public class ScheduleService : IScheduleService
 
 public interface IScheduleService
 {
-    Task ProcessSchedule(ScheduleRequest request);
+    Task CreateSchedule(ScheduleRequest request);
 }

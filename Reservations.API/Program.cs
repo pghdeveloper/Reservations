@@ -32,6 +32,8 @@ builder.Services.AddScoped<ISqlConnectionFactory, SqlConnectionFactory>();
 builder.Services.AddScoped<IReservationSystemsRepository, ReservationSystemRepository>();
 builder.Services.AddScoped<IScheduleService, ScheduleService>();
 builder.Services.AddScoped<IValidator<ScheduleRequest>, ScheduleRequestValidator>();
+builder.Services.AddScoped<IValidator<AppointmentRequest>, AppointmentRequestValidator>();
+builder.Services.AddScoped<IAppointmentService, AppointmentService>();
 
 builder.Services.AddCors(options => options.AddPolicy("AllowAll", p => p.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
 

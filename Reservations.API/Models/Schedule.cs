@@ -11,7 +11,7 @@ public class Schedule
     [JsonIgnore]
     public int ScheduleId { get; set; }
     public int ProviderId { get; set; }
-    public string StartDateTime { get; set; }
-    public string EndDateTime { get; set; }
-    public string ScheduleExternalId { get; set; }
+    public string StartDateTime { get; set; } = string.Empty;
+    public string EndDateTime { get; set; } = string.Empty;
+    public string ScheduleExternalId { get; set; } = string.Empty;
 }

@@ -18,7 +18,7 @@ public class ScheduleController : Controller
         _validator = validator;
     }
     
-    [HttpPost("provider")]
+    [HttpPost]
     public async Task<IActionResult> PostProviderSchedule([FromBody] ScheduleRequest request)
     {
         try
@@ -29,7 +29,7 @@ public class ScheduleController : Controller
                 return BadRequest(result.Errors.Select(e => e.ErrorMessage).ToArray());
             }
             
-            await _scheduleService.ProcessSchedule(request);
+            await _scheduleService.CreateSchedule(request);
             return Ok("Schedule processed");
         }
         catch (Exception ex)
