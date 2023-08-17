@@ -31,8 +31,12 @@ Create Table Appointments(
                              Confirmed INTEGER NOT NULL,
                              Expired INTEGER NOT NULL,
                              FOREIGN KEY (ScheduleId)
-                                 REFERENCES Schedules (ScheduleId)
+                                 REFERENCES Schedules (ScheduleId),
+                                FOREIGN KEY (ClientId)
+                                    REFERENCES Clients (ClientId)
 );
+
+DROP Table Appointments;
 
 INSERT INTO Providers (ProviderExternalId, FirstName, LastName)
 VALUES ('9a74197d-d550-421f-aab5-eb2fc1981655', 'John', 'Cena');
@@ -66,3 +70,10 @@ select *
 from Schedules;
 
 Select * from Schedules where Date(StartDateTime) = '2023-08-26';
+
+INSERT INTO Clients (ClientExternalId, FirstName, LastName)
+VALUES ('f31ec68b-121b-4da2-aa05-55e317c489ab', 'Lloyd', 'Bannings');
+INSERT INTO Clients (ClientExternalId, FirstName, LastName)
+VALUES ('7990c7ff-a23c-4cad-b62b-bb33c664bd78', 'Rean', 'Schwarzer');
+
+Select * from clients;

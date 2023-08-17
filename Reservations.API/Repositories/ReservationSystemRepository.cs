@@ -38,6 +38,17 @@ public class ReservationSystemRepository : IReservationSystemsRepository
             return await connection.QueryFirstOrDefaultAsync<Schedule>(sql, new { id, date });
         }
     }
+    
+    public async Task<Appointment> InsertAppointment(Appointment appointment)
+    {
+        using (var connection = _sqlConnectionFactory.CreateSqlConnection())
+        {
+            var id = await connection.InsertAsync(appointment);
+            
+            const string sql = @"SELECT * FROM Appointments WHERE AppointmentId = @id LIMIT 1";
+            return await connection.QueryFirstOrDefaultAsync<Appointment>(sql, new { id });
+        }
+    }
 }
 
 public interface IReservationSystemsRepository
@@ -45,7 +56,5 @@ public interface IReservationSystemsRepository
     Task<Provider> GetProvider(string externalId);
     Task InsertSchedule(Schedule schedule);
     Task<Schedule> GetSchedule(int id, string date);
-    //Task DeleteAsync(Guid externalId);
-    //Task<IEnumerable<Assignments>> GetTasksByAssignee(string assignee);
-    //Task UpdateAsync(Assignments assignment);
+    Task<Appointment> InsertAppointment(Appointment appointment);
 }
