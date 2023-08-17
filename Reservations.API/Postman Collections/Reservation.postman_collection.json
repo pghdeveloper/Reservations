@@ -1,0 +1,231 @@
+{
+	"info": {
+		"_postman_id": "52c21f86-7ae1-4d39-9e0c-adcafbbf83ce",
+		"name": "Reservation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28699198"
+	},
+	"item": [
+		{
+			"name": "Add Provider Schedule",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"providerExternalId\": \"35ae9cc0-1d37-4441-8201-a27f69aa5397\",\n    \"startDateTime\": \"2023-09-12T08:15:00\",\n    \"EndDateTime\": \"2023-09-12T17:00:00\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5207/Schedule",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5207",
+					"path": [
+						"Schedule"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add Provider Schedule",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"providerExternalId\": \"35ae9cc0-1d37-4441-8201-a27f69aa5397\",\n    \"startDateTime\": \"2023-09-12T08:15:00\",\n    \"EndDateTime\": \"2023-09-12T17:00:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5207/Schedule",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5207",
+							"path": [
+								"Schedule"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 17 Aug 2023 03:15:24 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "Schedule processed"
+				}
+			]
+		},
+		{
+			"name": "Add Appointment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"clientExternalId\": \"f31ec68b-121b-4da2-aa05-55e317c489ab\",\n    \"scheduleExternalId\": \"23997107-585f-488d-910a-103f7e055c0f\",\n    \"AppointmentDateTime\": \"2023-09-12T16:00:00\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5207/Appointment",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5207",
+					"path": [
+						"Appointment"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add Appointment",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"clientExternalId\": \"f31ec68b-121b-4da2-aa05-55e317c489ab\",\n    \"scheduleExternalId\": \"23997107-585f-488d-910a-103f7e055c0f\",\n    \"AppointmentDateTime\": \"2023-09-12T15:45:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5207/Appointment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5207",
+							"path": [
+								"Appointment"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 17 Aug 2023 02:52:23 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"clientExternalId\": \"f31ec68b-121b-4da2-aa05-55e317c489ab\",\n    \"scheduleExternalId\": \"23997107-585f-488d-910a-103f7e055c0f\",\n    \"appointmentDateTime\": \"2023-09-12T15:45:00\",\n    \"appointmentExternalId\": \"24a21813-d1e4-4d74-b5a7-7b0dd437092c\",\n    \"confirmed\": false,\n    \"expired\": false\n}"
+				}
+			]
+		},
+		{
+			"name": "Confirm Appointment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5207/Appointment/24a21813-d1e4-4d74-b5a7-7b0dd437092c",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5207",
+					"path": [
+						"Appointment",
+						"24a21813-d1e4-4d74-b5a7-7b0dd437092c"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Confirm Appointment",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5207/Appointment/24a21813-d1e4-4d74-b5a7-7b0dd437092c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5207",
+							"path": [
+								"Appointment",
+								"24a21813-d1e4-4d74-b5a7-7b0dd437092c"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 17 Aug 2023 03:02:11 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "Appointment Confirmed"
+				}
+			]
+		}
+	]
+}
